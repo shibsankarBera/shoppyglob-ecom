@@ -1,12 +1,17 @@
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 
+
 function App() {
-  return (<>
- <h1 className="text-3xl font-bold text-blue-600 text-center mt-10">
-      ShoppyGlobe 🚀
-    </h1>
-  <Header/>
-  </>
+  return ( <BrowserRouter>
+      <Header />
+
+      <Routes>
+        <Route path="/" element={<h1>Home</h1>} />
+        <Route path="/cart" element={<h1>Cart</h1>} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

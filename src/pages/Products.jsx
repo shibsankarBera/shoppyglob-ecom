@@ -7,7 +7,8 @@ function Products() {
   const [search, setSearch] = useState("");
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
-  ///save carts
+
+  //Load cart from localStorage
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(savedCart);
@@ -25,11 +26,16 @@ function Products() {
   const filteredProducts = products.filter((item) =>
     item.title.toLowerCase().includes(search.toLowerCase()),
   );
+  //Save cart to localStorage
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
   ///handel add to cart func
   const handleAddToCart = (product) => {
     const updated = [...cart, { ...product, qty: 1 }];
     setCart(updated);
   };
+  l;
 
   return (
     <div className="p-5">
@@ -53,7 +59,12 @@ function Products() {
               />
               <h2>{item.title}</h2>
               <p>${item.price}</p>
-              <button onClick={() => handleAddToCart(item)}>Add to Cart</button>
+              <button
+                onClick={() => handleAddToCart(item)}
+                className="bg-blue-500 text-white px-3 py-1 mt-2"
+              >
+                Add to Cart
+              </button>
             </div>
           </Link>
         ))}

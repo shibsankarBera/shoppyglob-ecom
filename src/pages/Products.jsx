@@ -19,10 +19,10 @@ function Products() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {products.map((item) => (
-          <Link to={`/product/${item.id}`}>
+          <Link key={item.id} to={`/product/${item.id}`}>
             <div className="border p-4 rounded shadow cursor-pointer">
               <img src={item.image} className="h-40 mx-auto" />
-              <h2 className="mt-2">{item.title}</h2>
+              <h2>{item.title}</h2>
               <p>${item.price}</p>
             </div>
           </Link>

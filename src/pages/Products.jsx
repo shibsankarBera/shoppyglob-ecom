@@ -3,9 +3,16 @@ import { Link } from "react-router-dom";
 
 function Products() {
   //product filter instantly by type
+  //states
   const [search, setSearch] = useState("");
   const [products, setProducts] = useState([]);
-
+  const [cart, setCart] = useState([]);
+  ///save carts
+  useEffect(() => {
+    const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCart(savedCart);
+  }, []);
+  ///data feth
   useEffect(() => {
     fetch("https://dummyjson.com/products")
       .then((res) => res.json())
@@ -16,8 +23,13 @@ function Products() {
   }, []);
   // filtering logic based on search input
   const filteredProducts = products.filter((item) =>
-  item.title.toLowerCase().includes(search.toLowerCase())
-);
+    item.title.toLowerCase().includes(search.toLowerCase()),
+  );
+  ///handel add to cart func
+  const handleAddToCart = (product) => {
+    const updated = [...cart, { ...product, qty: 1 }];
+    setCart(updated);
+  };
 
   return (
     <div className="p-5">
@@ -41,6 +53,7 @@ function Products() {
               />
               <h2>{item.title}</h2>
               <p>${item.price}</p>
+              <button onClick={() => handleAddToCart(item)}>Add to Cart</button>
             </div>
           </Link>
         ))}

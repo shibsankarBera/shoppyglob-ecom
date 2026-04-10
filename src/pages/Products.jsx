@@ -35,7 +35,7 @@ function Products() {
     const updated = [...cart, { ...product, qty: 1 }];
     setCart(updated);
   };
-  l;
+  
 
   return (
     <div className="p-5">

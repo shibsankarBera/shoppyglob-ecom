@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -7,7 +8,7 @@ function Products() {
     fetch("https://dummyjson.com/products")
       .then((res) => res.json())
       .then((data) => {
-        setProducts(data.products); 
+        setProducts(data.products);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -18,11 +19,13 @@ function Products() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {products.map((item) => (
-          <div key={item.id} className="border p-4 rounded">
-            <img src={item.thumbnail} className="h-40 mx-auto" />
-            <h2>{item.title}</h2>
-            <p>${item.price}</p>
-          </div>
+          <Link to={`/product/${item.id}`}>
+            <div className="border p-4 rounded shadow cursor-pointer">
+              <img src={item.image} className="h-40 mx-auto" />
+              <h2 className="mt-2">{item.title}</h2>
+              <p>${item.price}</p>
+            </div>
+          </Link>
         ))}
       </div>
     </div>

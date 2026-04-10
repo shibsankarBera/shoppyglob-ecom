@@ -8,6 +8,7 @@ function Header() {
       <div className="space-x-4">
          <Link to="/">Home</Link>
         <Link to="/cart">Cart</Link>
+        <Link to="/products">Products</Link>
       </div>
     </div>
   );

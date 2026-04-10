@@ -21,7 +21,7 @@ function Products() {
         {products.map((item) => (
           <Link key={item.id} to={`/product/${item.id}`}>
             <div className="border p-4 rounded shadow cursor-pointer">
-              <img src={item.image} className="h-40 mx-auto" />
+              <img src={item.image || item.thumbnail} className="h-40 mx-auto" />
               <h2>{item.title}</h2>
               <p>${item.price}</p>
             </div>
